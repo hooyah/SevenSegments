@@ -23,7 +23,8 @@ String url = "/youtube/v3/channels?part=statistics&id=<YOUR_CHANNEL_ID>&fields=i
 const int httpsPort = 443;
 
 // Use web browser to view and copy SHA1 fingerprint of the certificate
-const char fingerprint[] PROGMEM = "43 2f 75 94 fb 9c 00 ab ee 26 22 61 57 50 bf b4 d2 05 85 c7";
+// Forget about the finger print. You'll have to update it every time the certificate changes
+//const char fingerprint[] PROGMEM = "43 2f 75 94 fb 9c 00 ab ee 26 22 61 57 50 bf b4 d2 05 85 c7";
 
 
 // The meat
@@ -32,7 +33,10 @@ int get_subscriber_count()
 {
   // Use WiFiClientSecure class to create TLS connection
   WiFiClientSecure client;
-  client.setFingerprint(fingerprint);
+  //client.setFingerprint(fingerprint);		// keeping track of finger prints isn't easy
+  client.setInsecure();						// set the client to ignore checking for it
+											// otherwise the counter will stop working the next time the certificate changes
+  
   client.setTimeout(10000);
 
   if (!client.connect(host, httpsPort)) {
