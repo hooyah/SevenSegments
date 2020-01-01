@@ -100,9 +100,14 @@ void uart_send_buffered(const char* src, uint8_t size)
 }
 
 
+#if defined(__AVR_ATmega328PB__)
 ISR(USART0_RX_vect)
-{
-	
+#elif defined(__AVR_ATmega328P__)
+ISR(USART_RX_vect) 
+#else
+#error unsupported chip ?
+#endif
+{	
 	uint8_t chr = UDR0;
 	if(chr == '$') // start of msg: move buffer pointer to the beginning
 	{
@@ -119,7 +124,13 @@ ISR(USART0_RX_vect)
 	}
 }
 
+#if defined(__AVR_ATmega328PB__)
 ISR(USART0_TX_vect)
+#elif defined(__AVR_ATmega328P__)
+ISR(USART_TX_vect)
+#else
+#error unsupported chip ?
+#endif
 {
 	// tx buffer is aligned to the end, ie. '-----send this'
 	if(!tx_ready) {
