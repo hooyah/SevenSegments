@@ -22,7 +22,7 @@ void shift_motor(int16_t offset);
 void register_step_callback( step_callback_t p_callback, int16_t every_n_steps );
 
 
-#define TIMER_PRESCALER_DIV1 _BV(CS40)
+#define TIMER_PRESCALER_DIV1 _BV(CS10)
 #define TIMER_PRESCALER_MASK 0x07
 
 // motor
