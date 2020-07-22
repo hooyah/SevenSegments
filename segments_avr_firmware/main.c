@@ -1,8 +1,10 @@
 /*
- * mech7tst.cpp
+ * main.c
  *
  * Created: 15/09/2019 10:30:43 PM
  * Author : fhu
+ *
+ * V1.0 - shipping
  */ 
 
 #include "global.h"
@@ -13,6 +15,16 @@
 #include "uart.h"
 #include "adc.h"
 #include "timers.h"
+
+/* ---- fuses atmega328P, not necessary unless you made your own board ---- */
+/*#include <avr/io.h>
+__fuse_t __fuse __attribute__((section (".fuse"))) =
+{
+	.low = 0xFF,
+	.high = 0xD9,
+	.extended = 0xFF,
+};*/
+
 
 const int16_t digit_offset = -STEPS_PER_DIGIT/2;  // device specific magnet position offset
 int16_t position_deviation = 0;					  // once a magnetic event is detected the deviation from the actual and the assumed position shows up here

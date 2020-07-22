@@ -16,6 +16,9 @@
 #define LED_PIN 5
 #define LED_DDR DDRB
 
+// uncomment to reverse the direction of the motor, NB. is has to rotate counter clockwise
+#define MOTOR_REVERSE
+
 #define MOTOR_C0_PIN  5
 #define MOTOR_C0_DDR  DDRD
 #define MOTOR_C0_PORT PORTD

@@ -116,7 +116,11 @@ void step()
 static uint8_t  stp = 0;
 static uint16_t internal_count = 0;
 	
+	#ifdef MOTOR_REVERSE
+	uint8_t pattern = 0x33 << (3-stp);
+	#else
 	uint8_t pattern = 0x33 << stp;
+	#endif
 
 	if(pattern&16)
 		MOTOR_C0_PORT |= _BV(MOTOR_C0_PIN);
